@@ -1,0 +1,178 @@
+
+           CMPE 220,  Advanced Parallel Processing
+                   Prof. Heiner Litz
+                   TA: Marcelo Siero.
+                   Fall Quarter 2018.
+
+ HWK 4.  The Stencil Program, use of Shared Memory in CUDA (40 Pts)
+
+This exercise is help you learn and gain experience with CUDA programming
+and with how to use shared memory to accelerate important algorithms.
+
+Machines:
+
+You will be logging into the citrisdance.soe.ucsc.edu to run your program.
+To use it you should be inside the UCSC network.  You can login through 
+eduroam while on campus, or you can use the Cisco VPN from off-campus.  Let 
+us know if this is a problem. citrisdance a graduate department server, so 
+you should use your Gold user credentials to login.
+
+citrisdance has two Tesla K20c Nvidia GPU's that you can use.  You can get 
+more information about them by running this program: 
+  /usr/local/cuda-9.2/samples/bin/x86_64/linux/release/deviceQuery
+
+To see how much activity there is on the two GPU's that you are using
+run the "nvidia-smi" program.  This will show you how many other processes
+are running.
+
+The GPU's are currently set in the "Default" compute mode.  The output of the 
+nvidia-smi will show you the mode, look at the upper right part of the titles
+reading "Compute M.".  In this mode the GPU's can have more that one job 
+submitted to them.  When jobs are submitted from different host processes, 
+they are assigned a different context and get executed serialized (as opposed 
+to running at the same time).  The GPU executes the programs in the job queue
+when the GPU next goes idle.  When it does so it completes the activity from 
+previous launhed job before running a new one.
+
+DELIVERABLES:
+
+1. Submit your programs and answers using git into a directory HWK4 under
+   your group repository.
+
+STEPS TO TAKE:
+
+First, clone the repository:
+   https://gitlab.soe.ucsc.edu/gitlab/cmpe220/fall18/stencil
+
+You will get this README.hwk4 file, and the program: 1d_stencil.cu
+along with the compilation scripts: do_stencil, and do_stencil_shared
+and do_stencil_optim.  While in citrisdance you should be able to 
+compile 1d_stencil.cu with:  ./do_stencil and then run it.
+Do not touch this program, make copies of it one for Part 1, one for
+Part 2, and one for Part 3 as directed.
+
+The stencil code bears a lot of similarity to the convolution algorithm,
+an algorithm used extensively for implementing Artificial Intelligence.
+It is also ilustrative of how shared memory can be used to accelerate
+many program.
+
+Part 1:
+
+Copy the unaltered program 1d_stencil.cu into 1d_stencil_block.cu an
+do the items below in that program.
+
+To implement the functions below, add any global variables, constants,
+or #defines that you feel are necessary.  Numerous functions below use the 
+include file: cuda_device_runtime_api.h.  You can use the do_... compile
+scripts for compiling.  They provide a -I include path for the needed 
+include file.  You may want to peruse this particular include file and see 
+what is in it.
+
+A) FIND CUDA ERRORS: Create a function cudaErrorCheck() as described.
+   Change the value of N temporarilly to be so large tht you get an error
+   message indicating that you have exceeded the size of global memory for the
+   GPU, and write the error message that you got on your report.  Then restore
+   the value of N to what was given, so that it does not give an error.
+
+B) GET DEVICE PROPERTIES: implement getDeviceProperties() fumction as described.
+
+C) ADD A TIMING FUNCTION: Add code to the start_timer() and stop_timer() 
+   functions as described in the code.  The time will be in miliseconds.  Use 
+   cuda event timer functions to implement these.
+
+D) COMPILE AND RUN AND TIME the program. Note the amount of time it takes it
+   took to execute, and indicate that information in your report for both the
+   GPU and with the CPU.  Include those in your report, and show the ratio of
+   between these two.  The GPU code as given, so far only uses block level 
+   paralellism.
+
+Submit 1d_stencil_block.cu with git to a HWK4 subdirectory under your group 
+directory.
+
+Part 2:
+   Now, first copy the program you have modified with all the changes of 
+   part 1 to a program by this name: 1d_stencil_shared.cu
+   
+   Find the part of the code where it says this:
+    /* FIXME PART 2 - MODIFIY PROGRAM TO USE SHARED MEMORY. */
+
+   Modify the code to use shared memory.  To accelerate the code with shared 
+   memory you will provide a "halo", which shares the data across adjacent 
+   blocks. That is to say the halo on the left of the data in one block will 
+   be the same as the halo on the right of the other block.  You have to make 
+   sure you zero out the first halo, and the last halo. 
+   
+   Note, that this task can be difficult to get it perfect.  If you end up 
+   feeling stuck, you may want to use nvidia-gdb to do some debugging.  This 
+   is a variation of well known easy to use command line gdb debugger, but 
+   adapted for use in a GPU environment.  Read the tutorial found at:
+    https://cis.gvsu.edu/~wolffe/courses/cs677/projects/tutorial_CUDA-utilities.html
+
+   Note that the checkResults function provided, is your friend.  In a lot 
+   of GPU programs one first starts out with a CPU version of the program, 
+   which can be used as golden standard to verify the GPU code.  
+   If you get an error, checkresults will give you a limited number of values 
+   that are in error to help you find your mistake.
+
+   Do a git submit of 1d_stencil_shared.cu in the same manner as Part 1.
+
+Part 3:
+   Copy the program part 2, and name the new program 1d_stencil_optim.cu
+
+   Try to optimize the program the program you just modified by trying various 
+   values of blockSize (# of threads per block) and gridSize (# of blocks) and 
+   by plotting the performance of the program.  For gridDim (number of blocks) 
+   starting with 16 and ending with 512 and for blockDim (number of threads per 
+   block) starting with 32 and ending in 1024.  Make sure you step up by powers 
+   of 2.  This should take about 11 minutes to run them all in the GPU.
+
+   There is a way to allow the size of the __shared__ memory array you will 
+   use to be allocated with a variable number of entries instead of with a
+   constant allocated size.  This is called dynamic allocation.  It can be 
+   done by declaring it as:
+     __shared__ arr[];
+
+   With no dimensions provided and providing its size on the kernel invocation
+   by adding a third specification parameter such as:
+       <<<gridSize, blockSize, size_of_shared_mem_in_bytes>>>
+
+   The value provided by the expression shown as: size_of_shared_mem_in_bytes
+   determines how much space of shared memory will be allocated to the
+   array.  Remember that sizeof of an integer is 4 bytes.
+
+   This article gives more details:
+       https://devblogs.nvidia.com/using-shared-memory-cuda-cc/
+
+   To help optimize this and learn more about GPUs, provide 3 graphs showing 
+   the elapsed time against blockDim (threads per block) and gridDim 
+   (blocks per grid) and against the total number of threads.  We are 
+   providing providing you a python script to help with this.
+
+   Do note that different GPU's optimize differently, since they have different 
+   number of SMs, and different number registers and different sizes for
+   shared memory per block.   Some programs are more sensitive than others
+   to this type of optimization.
+
+   Do a git submit of 1d_stencil_optim.cu in the same manner as Part 1 and 2.
+
+Part 4: Questions to include in pdf document.
+   Answer the following 2 questions and include the answer in your PDF:
+
+   1. How do the results of the best time for the shared memory GPU code
+      compared with block only code, and compared with the CPU code.
+
+   2. What is the purpose of using these "halos" in GPU programming?
+      What kind of programs do would this apply to.
+
+   3. What does __syncthreads do?
+
+   4. Can you use __synchtreads to synchronize all the threads in a Grid?
+
+   5. What is the purpose of using __syncthreads in the shared memory 
+      version of the stencil program?
+
+   6. Make some observations based on your resulting graphs.  Add comments
+      as to what other optimizations can be done to optimize stencil.
+
+Submit with git a pdf or text file and .png files with your answers.
+

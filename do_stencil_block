@@ -1,0 +1,15 @@
+
+p=1d_stencil_block
+opt=" -O3 "
+# For debugging uncomment below.
+# opt=" -g -G "
+
+/usr/local/cuda-9.1/bin/nvcc \
+$opt \
+-DGPU=0 \
+-o $p \
+-std=c++11 \
+-I /usr/local/cuda-9.1/include/ \
+$p.cu
+
+# Uses include file: cuda_device_runtime_api.h
