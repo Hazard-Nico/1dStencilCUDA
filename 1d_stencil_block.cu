@@ -1,4 +1,4 @@
-// UCSC CMPE220 Advanced Parallel Processing 
+// UCSC CMPE220 Advanced Parallel Processing
 // Prof. Heiner Leitz
 // Author: Marcelo Siero.
 // Modified from code by:: Andreas Goetz (agoetz@sdsc.edu)
@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <cuda_device_runtime_api.h>
 
-// define vector length, stencil radius, 
+// define vector length, stencil radius,
 #define N (1024*1024*512l)
 #define RADIUS 3
 #define GRIDSIZE 128
@@ -21,7 +21,7 @@ int blockSize = BLOCKSIZE;
 
 void cudaErrorCheck() {
    // FIXME: Add code that finds the last error for CUDA functions performed.
-   // Upon getting an error have it print out a meaningful error message as 
+   // Upon getting an error have it print out a meaningful error message as
    //  provided by the CUDA API, then exit with an error exit code.
 }
 
@@ -36,7 +36,7 @@ float stop_timer() {
 
 cudaDeviceProp prop;
 void getDeviceProperties() {
-   // FIXME: Implement this function so as to acquire and print the following 
+   // FIXME: Implement this function so as to acquire and print the following
    // device properties:
    //    Major and minor CUDA capability, total device global memory,
    //    size of shared memory per block, number of registers per block,
@@ -132,6 +132,17 @@ void checkResults(int *h_in, int *h_out, int DoCheck=True) {
    }
 }
 
+void cudaErrorCheck()
+{
+  cudaError_t error = cudaGetLastError();
+  const char* errorName = cudaGetErrorName(error);
+  std::string s0(errorName);
+  printf("The last error name is %s", s0);
+
+  const char* errorDescription = cudaGetErrorString(error);
+  std::string s1(errorDescription);
+  printf("The last error description is %s", s1);
+}
 // ------------
 // main program
 // ------------
@@ -205,4 +216,3 @@ int main(void){
 
   return 0;
 }
-
