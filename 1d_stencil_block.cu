@@ -33,16 +33,16 @@ void cudaErrorCheck() {
 void start_timer(cudaEvent_t* start) {
    // FIXME: ADD TIMING CODE, HERE, USE GLOBAL VARIABLES AS NEEDED.
    cudaEventCreate(start);
-   cudaEventRecord(start);
+   cudaEventRecord(*start);
 }
 
 float stop_timer(cudaEvent_t* stop) {
    // FIXME: ADD TIMING CODE, HERE, USE GLOBAL VARIABLES AS NEEDED.
    cudaEventCreate(stop);
-   cudaEventRecord(stop);
+   cudaEventRecord(*stop);
 
-   cudaEventSynchronize(stop);
-   cudaEventElapsedTime(&milliseconds, start, stop);
+   cudaEventSynchronize(*stop);
+   cudaEventElapsedTime(&milliseconds, *start, *stop);
    return(milliseconds);
 }
 
