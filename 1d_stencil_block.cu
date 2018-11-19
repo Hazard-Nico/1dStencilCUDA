@@ -139,11 +139,11 @@ void cudaErrorCheck()
   cudaError_t error = cudaGetLastError();
   const char* errorName = cudaGetErrorName(error);
   std::string s0(errorName);
-  printf("The last error name is %s", s0);
+  std::cout << "The last error name is %s" << s0 << std::endl;
 
   const char* errorDescription = cudaGetErrorString(error);
   std::string s1(errorDescription);
-  printf("The last error description is %s", s1);
+  std::cout << "The last error description is %s" << s1 << std::endl;
 }
 // ------------
 // main program
