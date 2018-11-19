@@ -22,13 +22,18 @@ int gridSize  = GRIDSIZE;
 int blockSize = BLOCKSIZE;
 
 float milliseconds = 0;
-/*
-void cudaErrorCheck() {
-   // FIXME: Add code that finds the last error for CUDA functions performed.
-   // Upon getting an error have it print out a meaningful error message as
-   //  provided by the CUDA API, then exit with an error exit code.
+
+void cudaErrorCheck()
+{
+  cudaError_t error = cudaGetLastError();
+  const char* errorName = cudaGetErrorName(error);
+  std::string s0(errorName);
+  std::cout << "The last error name is :\t" << s0 << std::endl;
+
+  const char* errorDescription = cudaGetErrorString(error);
+  std::string s1(errorDescription);
+  std::cout << "The last error description is :\t" << s1 << std::endl;
 }
-*/
 
 void start_timer(cudaEvent_t* start) {
    // FIXME: ADD TIMING CODE, HERE, USE GLOBAL VARIABLES AS NEEDED.
@@ -159,17 +164,7 @@ void checkResults(int *h_in, int *h_out, int DoCheck=True) {
    }
 }
 
-void cudaErrorCheck()
-{
-  cudaError_t error = cudaGetLastError();
-  const char* errorName = cudaGetErrorName(error);
-  std::string s0(errorName);
-  std::cout << "The last error name is :\t" << s0 << std::endl;
 
-  const char* errorDescription = cudaGetErrorString(error);
-  std::string s1(errorDescription);
-  std::cout << "The last error description is :\t" << s1 << std::endl;
-}
 // ------------
 // main program
 // ------------
