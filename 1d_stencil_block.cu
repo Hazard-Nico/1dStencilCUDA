@@ -216,7 +216,7 @@ int main(void){
   printThreadSizes();
   start_timer(&start);
   stencil_1D<<<gridSize,blockSize>>>(d_in, d_out, N);
-  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << std::endl;
+  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
   // copy results back to host
   cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
   cudaErrorCheck();
@@ -235,7 +235,7 @@ int main(void){
   start_timer(&start);
   // Use checkResults to time CPU version of the stencil with False flag.
   checkResults(h_in, h_out, False);
-  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << std::endl;
+  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms"<< std::endl;
   //=====================================================
 
   // deallocate host memory
