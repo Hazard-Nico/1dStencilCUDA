@@ -56,7 +56,7 @@ void getDeviceProperties() {
    cudaGetDevice(&device);
    cudaGetDeviceProperties(&prop, device);
 
-   std::cout << "The major and minor cuda capabilities are: \t\t" << device.major <<", "<< device.minor << std::endl;
+   std::cout << "The major and minor cuda capabilities are: \t\t" << device.major << ", "<< device.minor << std::endl;
    std::cout << "The total device global memory is : \t\t" << static_cast<int>(device.totalGlobalMem) << " bytes" << std::endl;
    std::cout << "The size of shared memory per block is : \t\t" << static_cast<int>(device.sharedMemPerBlock) << " bytes" << std::endl;
    std::cout << "The number of registers per block is: \t\t" << device.regsPerBlock << std::endl;
