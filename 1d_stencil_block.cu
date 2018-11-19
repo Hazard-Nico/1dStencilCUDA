@@ -9,9 +9,11 @@
 #include <iostream>
 #include <stdio.h>
 #include <cuda_device_runtime_api.h>
+#include <chrono>
 
 // define vector length, stencil radius,
-#define N (1024*1024*512l)
+#define INPUTSIZE 64l
+#define N (1024*1024*INPUTSIZE)
 #define RADIUS 3
 #define GRIDSIZE 128
 #define BLOCKSIZE 256
@@ -19,6 +21,7 @@
 int gridSize  = GRIDSIZE;
 int blockSize = BLOCKSIZE;
 
+float milliseconds = 0;
 /*
 void cudaErrorCheck() {
    // FIXME: Add code that finds the last error for CUDA functions performed.
@@ -27,13 +30,20 @@ void cudaErrorCheck() {
 }
 */
 
-void start_timer() {
+void start_timer(cudaEvent_t* start) {
    // FIXME: ADD TIMING CODE, HERE, USE GLOBAL VARIABLES AS NEEDED.
+   cudaEventCreate(start);
+   cudaEventRecord(start);
 }
 
-float stop_timer() {
+float stop_timer(cudaEvent_t* stop) {
    // FIXME: ADD TIMING CODE, HERE, USE GLOBAL VARIABLES AS NEEDED.
-   return(0.0);
+   cudaEventCreate(stop);
+   cudaEventRecord(stop);
+
+   cudaEventSynchronize(stop);
+   cudaEventElapsedTime(&milliseconds, start, stop);
+   return(milliseconds);
 }
 
 cudaDeviceProp prop;
@@ -169,6 +179,7 @@ int main(void){
   int *d_in, *d_out;
   long size = N * sizeof(int);
   int i;
+  cudaEvent_t start, stop;
 
   // allocate host memory
   h_in = new int[N];
@@ -203,7 +214,7 @@ int main(void){
   //----------------------------------------------------------
   newline();
   printThreadSizes();
-  start_timer();
+  start_timer(&start);
   stencil_1D<<<gridSize,blockSize>>>(d_in, d_out, N);
   std::cout << "Elapsed time: " << stop_timer() << std::endl;
   // copy results back to host
