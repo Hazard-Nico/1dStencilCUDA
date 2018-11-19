@@ -19,11 +19,13 @@
 int gridSize  = GRIDSIZE;
 int blockSize = BLOCKSIZE;
 
+/*
 void cudaErrorCheck() {
    // FIXME: Add code that finds the last error for CUDA functions performed.
    // Upon getting an error have it print out a meaningful error message as
    //  provided by the CUDA API, then exit with an error exit code.
 }
+*/
 
 void start_timer() {
    // FIXME: ADD TIMING CODE, HERE, USE GLOBAL VARIABLES AS NEEDED.
