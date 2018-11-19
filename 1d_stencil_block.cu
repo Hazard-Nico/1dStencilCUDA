@@ -36,7 +36,7 @@ void start_timer(cudaEvent_t* start) {
    cudaEventRecord(*start);
 }
 
-float stop_timer(cudaEvent_t* stop) {
+float stop_timer(cudaEvent_t* start, cudaEvent_t* stop) {
    // FIXME: ADD TIMING CODE, HERE, USE GLOBAL VARIABLES AS NEEDED.
    cudaEventCreate(stop);
    cudaEventRecord(*stop);
@@ -216,7 +216,7 @@ int main(void){
   printThreadSizes();
   start_timer(&start);
   stencil_1D<<<gridSize,blockSize>>>(d_in, d_out, N);
-  std::cout << "Elapsed time: " << stop_timer() << std::endl;
+  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << std::endl;
   // copy results back to host
   cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
   cudaErrorCheck();
@@ -232,10 +232,10 @@ int main(void){
   //=====================================================
   newline();
   std::cout << "Running stencil with the CPU.\n";
-  start_timer();
+  start_timer(&start);
   // Use checkResults to time CPU version of the stencil with False flag.
   checkResults(h_in, h_out, False);
-  std::cout << "Elapsed time: " << stop_timer() << std::endl;
+  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << std::endl;
   //=====================================================
 
   // deallocate host memory
