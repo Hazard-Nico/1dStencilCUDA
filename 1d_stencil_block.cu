@@ -28,11 +28,11 @@ void cudaErrorCheck()
   cudaError_t error = cudaGetLastError();
   const char* errorName = cudaGetErrorName(error);
   std::string s0(errorName);
-  std::cout << "The last error name is :\t" << s0 << std::endl;
+  std::cout << ">>>> " <<  s0 << std::endl;
 
   const char* errorDescription = cudaGetErrorString(error);
   std::string s1(errorDescription);
-  std::cout << "The last error description is :\t" << s1 << std::endl;
+  std::cout << ">>>> " << s1 << std::endl;
 }
 
 void start_timer(cudaEvent_t* start) {
