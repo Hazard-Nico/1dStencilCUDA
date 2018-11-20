@@ -108,20 +108,39 @@ __global__ void stencil_1D(int *in, int *out, long dim){
     /* FIXME PART 2 - MODIFIY PROGRAM TO USE SHARED MEMORY. */
 
     // Apply the stencil
-    int result = 0;
-    for (int offset = -RADIUS; offset <= RADIUS; offset++) {
-      if ( gindex + offset < dim && gindex + offset > -1)
-	        result += in[gindex + offset];
+    temp[lindex] = in[gindex];
+
+    if (gindex < RADIUS)   //for the first 3 threads in the grid
+    {
+    temp[lindex - RADIUS] = 0;
+    temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+
     }
 
-    // Store the result
-    if (gindex < dim)
-      out[gindex] = result;
+else if (gindex >= (stride - RADIUS)) //last three threads in the grid
+{
+    temp[lindex - RADIUS] = in[gindex - RADIUS];
+    temp[lindex + BLOCKSIZE] = 0;
+}
 
-    // Update global index and quit if we are done
-    gindex += stride;
+else
+{
+  temp[lindex - RADIUS] = in[gindex - RADIUS];
+  temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+}
 
-    __syncthreads();
+// Apply the stencil
+int result = 0;
+for (int offset = -RADIUS; offset <= RADIUS; offset++)
+{
+  if ( lindex + offset < dim && lindex + offset > -1)
+             result += temp[lindex + offset];
+}
+
+  // Store the result
+out[gindex] = result;
+
+__syncthreads();
 
   }
 }
