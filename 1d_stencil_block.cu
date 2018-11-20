@@ -96,30 +96,52 @@ void printThreadSizes() {
 // -------------------------------------------------------
 // CUDA device function that performs 1D stencil operation
 // -------------------------------------------------------
-__global__ void stencil_1D(int *in, int *out, long dim){
+__global__ void stencil_1D_block(int *in, int *out, long dim){
 
   long gindex = threadIdx.x + blockDim.x * blockIdx.x;
   int stride = gridDim.x * blockDim.x;
 
-  // Go through all data
-  // Step all threads in a block to avoid synchronization problem
-  while ( gindex < (dim + blockDim.x) ) {
+  __shared__ int temp[BLOCKSIZE + 2*RADIUS];
+
+  int lindex = threadIdx.x + RADIUS;
+
+
+
+
 
     /* FIXME PART 2 - MODIFIY PROGRAM TO USE SHARED MEMORY. */
 
+    //read all gindex elements into the temp array
+    temp[lindex] = in[gindex];
+
+    if (gindex < RADIUS)   //for the first 3 threads in the grid
+    {
+        temp[lindex – RADIUS] = 0;
+        temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+    }
+
+    else if (gindex >= (stride - RADIUS)) //last three threads in the grid
+    {
+        temp[lindex - RADIUS] = in[gindex - RADIUS];
+        temp[lindex + BLOCKSIZE] = 0;
+    }
+
+    else
+    {
+      temp[lindex - RADIUS] = in[gindex - RADIUS];
+      temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+    }
+
     // Apply the stencil
     int result = 0;
-    for (int offset = -RADIUS; offset <= RADIUS; offset++) {
-      if ( gindex + offset < dim && gindex + offset > -1)
-	        result += in[gindex + offset];
+    for (int offset = -RADIUS; offset <= RADIUS; offset++)
+    {
+      if ( lindex + offset < dim && lindex + offset > -1)
+	        result += temp[lindex + offset];
     }
 
     // Store the result
-    if (gindex < dim)
-      out[gindex] = result;
-
-    // Update global index and quit if we are done
-    gindex += stride;
+    out[gindex] = result;
 
     __syncthreads();
 
@@ -210,7 +232,7 @@ int main(void){
   newline();
   printThreadSizes();
   start_timer(&start);
-  stencil_1D<<<gridSize,blockSize>>>(d_in, d_out, N);
+  stencil_1D_block<<<gridSize,blockSize>>>(d_in, d_out, N);
   std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
   // copy results back to host
   cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);

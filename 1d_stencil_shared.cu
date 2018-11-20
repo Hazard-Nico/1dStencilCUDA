@@ -105,20 +105,22 @@ CUDA device function that performs 1D stencil operation
 */
 __global__ void stencil_1D(int *in, int *out, long dim)
 {
+  __shared__ int temp[BLOCKSIZE + 2*RADIUS];
 
   long gindex = threadIdx.x + blockDim.x * blockIdx.x;
   int stride = gridDim.x * blockDim.x;
 
   // Go through all data
   // Step all threads in a block to avoid synchronization problem
-  while ( gindex < (dim + blockDim.x) )
+  while ( gindex < dim )
   {
 
-    /* FIXME PART 2 - MODIFIY PROGRAM TO USE SHARED MEMORY. */
+    /* FIXME PART 2 - MODIFY PROGRAM TO USE SHARED MEMORY. */
 
     // Apply the stencil
     int result = 0;
-    for (int offset = -RADIUS; offset <= RADIUS; offset++) {
+    for (int offset = -RADIUS; offset <= RADIUS; offset++)
+    {
       if ( gindex + offset < dim && gindex + offset > -1)
 	        result += in[gindex + offset];
     }
