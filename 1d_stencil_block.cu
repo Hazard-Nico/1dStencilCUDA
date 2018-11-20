@@ -112,38 +112,38 @@ __global__ void stencil_1D_block(int *in, int *out, long dim){
     /* FIXME PART 2 - MODIFIY PROGRAM TO USE SHARED MEMORY. */
 
     //read all gindex elements into the temp array
-    temp[lindex] = in[gindex];
+  temp[lindex] = in[gindex];
 
-    if (gindex < RADIUS)   //for the first 3 threads in the grid
-    {
-        temp[lindex – RADIUS] = 0;
-        temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
-    }
-
-    else if (gindex >= (stride - RADIUS)) //last three threads in the grid
-    {
-        temp[lindex - RADIUS] = in[gindex - RADIUS];
-        temp[lindex + BLOCKSIZE] = 0;
-    }
-
-    else
-    {
-      temp[lindex - RADIUS] = in[gindex - RADIUS];
+  if (gindex < RADIUS)   //for the first 3 threads in the grid
+  {
+      temp[lindex – RADIUS] = 0;
       temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
-    }
+  }
 
-    // Apply the stencil
-    int result = 0;
-    for (int offset = -RADIUS; offset <= RADIUS; offset++)
-    {
-      if ( lindex + offset < dim && lindex + offset > -1)
-	        result += temp[lindex + offset];
-    }
+  else if (gindex >= (stride - RADIUS)) //last three threads in the grid
+  {
+      temp[lindex - RADIUS] = in[gindex - RADIUS];
+      temp[lindex + BLOCKSIZE] = 0;
+  }
+
+  else
+  {
+    temp[lindex - RADIUS] = in[gindex - RADIUS];
+    temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+  }
+
+  // Apply the stencil
+  int result = 0;
+  for (int offset = -RADIUS; offset <= RADIUS; offset++)
+  {
+    if ( lindex + offset < dim && lindex + offset > -1)
+	       result += temp[lindex + offset];
+  }
 
     // Store the result
-    out[gindex] = result;
+  out[gindex] = result;
 
-    __syncthreads();
+  __syncthreads();
 
   }
 }
