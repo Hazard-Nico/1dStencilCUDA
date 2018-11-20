@@ -114,7 +114,7 @@ __global__ void stencil_1D(int *in, int *out, long dim)
 
   // Go through all data
   // Step all threads in a block to avoid synchronization problem
-  while ( gindex < diM )
+  while ( gindex < dim + blockDim.x)
   {
 
     /* FIXME PART 2 - MODIFY PROGRAM TO USE SHARED MEMORY. */
