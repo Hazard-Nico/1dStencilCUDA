@@ -104,12 +104,7 @@ __global__ void stencil_1D_block(int *in, int *out, long dim){
   __shared__ int temp[BLOCKSIZE + 2*RADIUS];
 
   int lindex = threadIdx.x + RADIUS;
-
-
-
-
-
-    /* FIXME PART 2 - MODIFIY PROGRAM TO USE SHARED MEMORY. */
+  /* FIXME PART 2 - MODIFIY PROGRAM TO USE SHARED MEMORY. */
 
     //read all gindex elements into the temp array
   temp[lindex] = in[gindex];
@@ -145,7 +140,6 @@ __global__ void stencil_1D_block(int *in, int *out, long dim){
 
   __syncthreads();
 
-  }
 }
 
 #define True  1
