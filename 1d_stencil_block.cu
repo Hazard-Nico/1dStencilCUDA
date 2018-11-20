@@ -111,9 +111,8 @@ __global__ void stencil_1D_block(int *in, int *out, long dim){
 
   if (gindex < RADIUS)   //for the first 3 threads in the grid
   {
-      std::cout << "The temp index is "<< (lindex - RADIUS) << std::endl;
-      temp[lindex – RADIUS] = 0;
       temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+      temp[lindex - RADIUS] = 0;
   }
 
   else if (gindex >= (stride - RADIUS)) //last three threads in the grid
