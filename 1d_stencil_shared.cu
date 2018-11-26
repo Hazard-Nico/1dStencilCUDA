@@ -15,8 +15,8 @@
 #define INPUTSIZE 64l
 #define N (1024*1024*INPUTSIZE)
 #define RADIUS 3
-#define GRIDSIZE 128
-#define BLOCKSIZE 256
+#define GRIDSIZE 512
+#define BLOCKSIZE 1024
 
 int gridSize  = GRIDSIZE;
 int blockSize = BLOCKSIZE;
