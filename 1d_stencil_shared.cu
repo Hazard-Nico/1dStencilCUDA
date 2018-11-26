@@ -118,15 +118,32 @@ __global__ void stencil_1D(int *in, int *out, long dim)
   {/* FIXME PART 2 - MODIFY PROGRAM TO USE SHARED MEMORY. */
     temp[lindex] = in[gindex];
 
-    if(tid < RADIUS){
-	if(gindex < RADIUS){temp[lindex - RADIUS] = 0;}
-	else{temp[lindex - RADIUS] = in[gindex - RADIUS];}
-	if(gindex + BLOCKSIZE >= N){
-		int diff = gindex + BLOCKSIZE - N;
-		if(diff < 3){temp[lindex + BLOCKSIZE] = 0;}
-		else{temp[lindex + BLOCKSIZE] = 0;}
-	}
-	else{temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];}
+    if(tid < RADIUS)
+    {
+	     if(gindex < RADIUS)
+       {
+         temp[lindex - RADIUS] = 0;
+       }
+	     else
+       {
+         temp[lindex - RADIUS] = in[gindex - RADIUS];
+       }
+	     if(gindex + BLOCKSIZE >= N)
+       {
+		       int diff = gindex + BLOCKSIZE - N;
+		         if(diff < 3)
+             {
+               temp[lindex + BLOCKSIZE] = 0;
+             }
+		         else
+             {
+               temp[lindex + BLOCKSIZE] = 0;
+             }
+	     }
+	     else
+       {
+         temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+       }
     }
 
    __syncthreads();
