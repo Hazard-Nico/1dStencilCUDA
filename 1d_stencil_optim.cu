@@ -298,6 +298,19 @@ int main(void){
   {
     for (int j = blockSize; j<=1024; j*=2)
     {
+      // allocate host memory
+      h_in = new int[N];
+      h_out = new int[N];
+
+      // allocate device memory
+      cudaMalloc((void **)&d_in, size);
+      cudaMalloc((void **)&d_out, size);
+      cudaErrorCheck();
+
+      // copy input data to device
+      cudaMemcpy(d_in, h_in, size, cudaMemcpyHostToDevice);
+      cudaErrorCheck();
+
       start_timer(&start);
       int temp_size = (j+(2*RADIUS));
       std::cout << "GridSize is "<<k<<" and block size is "<<j << std::endl;
