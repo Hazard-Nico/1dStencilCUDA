@@ -125,7 +125,6 @@ __global__ void stencil_1D(int *in, int *out, long dim)
       temp[lindex] = 0;
     }
 
-
     if(tid < RADIUS)
     {
 	     if(gindex < RADIUS)
@@ -138,15 +137,7 @@ __global__ void stencil_1D(int *in, int *out, long dim)
        }
 	     if(gindex + BLOCKSIZE >= N)
        {
-		       int diff = gindex + BLOCKSIZE - N;
-		         if(diff < 3)
-             {
-               temp[lindex + BLOCKSIZE] = 0;
-             }
-		         else
-             {
-               temp[lindex + BLOCKSIZE] = 0;
-             }
+         temp[lindex + BLOCKSIZE] = 0;
 	     }
 	     else
        {
