@@ -119,45 +119,28 @@ __global__ void stencil_1D(int *in, int *out, long dim)
     if (gindex < N)
     {
       temp[lindex] = in[gindex];
-      if(tid < RADIUS)
-      {
-        if(gindex < RADIUS)
-        {
-          temp[lindex - RADIUS] = 0;//the very first halo
-        }
-        else
-        {
-          temp[lindex - RADIUS] = in[gindex - RADIUS];//fill up the left halo
-        }
-	      if(gindex + BLOCKSIZE >= N)//check if it's the last block
-        {
-		      temp[lindex + BLOCKSIZE] = 0;//the very last halo
-        }
-		    else
-        {
-          temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];//fill up the right halo
-        }
-	    }
     }
     else
     {
       temp[lindex] = 0;
-      temp[lindex + BLOCKSIZE] = 0;
-      if (tid < RADIUS)
-      {
-        if(gindex < RADIUS)
-        {
-          temp[lindex - RADIUS] = 0;//the very first halo
-        }
-        else
-        {
-          temp[lindex - RADIUS] = in[gindex - RADIUS];//fill up the left halo
-        }
-      }
     }
 
-
-   __syncthreads();
+    if (tid < RADIUS)
+    {
+      if (gindex < RADIUS)
+      {
+        temp[lindex – RADIUS] = 0;
+      }
+      temp[lindex – RADIUS] = in[gindex – RADIUS];
+      if (gindex + BLOCKSIZE < N)
+      {
+        temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+      }
+      else
+      {
+          temp[lindex + BLOCKSIZE] = 0;
+      }
+    }
     // Apply the stencil
     int result = 0;
     for (int offset = -RADIUS; offset <= RADIUS; offset++)
@@ -167,10 +150,11 @@ __global__ void stencil_1D(int *in, int *out, long dim)
     }
 
     // Store the result
-    out[gindex] = result;
+    if (gindex < dim)
+      out[gindex] = result;
 
-    __syncthreads();
     gindex += stride;
+    __syncthreads();
 
   }
 }
