@@ -105,7 +105,7 @@ CUDA device function that performs 1D stencil operation
 */
 __global__ void stencil_1D(int *in, int *out, long dim)
 {
-  __shared__ int temp[BLOCKSIZE + 2*RADIUS];
+  __shared__ int temp[];
 
   long gindex = threadIdx.x + blockDim.x * blockIdx.x;
   int stride = gridDim.x * blockDim.x;
@@ -264,7 +264,7 @@ int main(void){
   newline();
   printThreadSizes();
   start_timer(&start);
-  stencil_1D<<<gridSize,blockSize>>>(d_in, d_out, N);
+  stencil_1D<<<gridSize,blockSize,>>>(d_in, d_out, N);
   std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
   // copy results back to host
   cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
@@ -290,6 +290,45 @@ int main(void){
   // deallocate host memory
   free(h_in);
   free(h_out);
+
+  //==========================Running different optimization values============================
+  gridSize = 16;
+  blockSize = 32;
+  for(i = gridSize; i<=512; i*=2)
+  {
+    for (j = blockSize; j<=1024; j*=2)
+    {
+      start_timer(&start);
+      int temp_size = (j+(2*RADIUS))*4;
+      stencil_1D<<<i,j,temp_size>>>(d_in, d_out, N);
+      std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
+      // copy results back to host
+      cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
+      cudaErrorCheck();
+      checkResults(h_in, h_out);
+      //----------------------------------------------------------
+
+      // deallocate device memory
+      cudaFree(d_in);
+      cudaFree(d_out);
+      cudaErrorCheck();
+      //=====================================================
+      // Evaluate total time of execution with just the CPU.
+      //=====================================================
+      newline();
+      std::cout << "Running stencil with the CPU.\n";
+      start_timer(&start);
+      // Use checkResults to time CPU version of the stencil with False flag.
+      checkResults(h_in, h_out, False);
+      std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms"<< std::endl;
+      //=====================================================
+
+      // deallocate host memory
+      free(h_in);
+      free(h_out);
+
+    }
+  }
 
   return 0;
 }
