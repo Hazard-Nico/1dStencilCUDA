@@ -230,7 +230,7 @@ int main(void){
   int i;
   cudaEvent_t start, stop;
 
-
+/*
   // allocate host memory
   h_in = new int[N];
   h_out = new int[N];
@@ -292,9 +292,9 @@ int main(void){
   free(h_in);
   free(h_out);
 
-
+ */
   //==========================Running different optimization values============================
-  /*
+
   gridSize = 16;
   blockSize = 32;
   for(int k = gridSize; k<=512; k*=2)
@@ -305,6 +305,11 @@ int main(void){
       h_in = new int[N];
       h_out = new int[N];
 
+      for (i=0; i<N; i++){
+        h_in[i] = 1;
+        h_out[i] = 1;
+      }
+
       // allocate device memory
       cudaMalloc((void **)&d_in, size);
       cudaMalloc((void **)&d_out, size);
@@ -314,6 +319,8 @@ int main(void){
       cudaMemcpy(d_in, h_in, size, cudaMemcpyHostToDevice);
       cudaErrorCheck();
 
+      newline();
+      printThreadSizes();
       start_timer(&start);
       int temp_size = (j+(2*RADIUS));
       std::cout << "GridSize is "<<k<<" and block size is "<<j << std::endl;
@@ -346,5 +353,5 @@ int main(void){
 
     }
   }
-  */
+
 }
