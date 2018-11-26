@@ -116,48 +116,37 @@ __global__ void stencil_1D(int *in, int *out, long dim)
   // Step all threads in a block to avoid synchronization problem
   while ( gindex < dim + blockDim.x)
   {/* FIXME PART 2 - MODIFY PROGRAM TO USE SHARED MEMORY. */
-    if (gindex < N)
-    {
-      temp[lindex] = in[gindex];
-    }
-    else
-    {
-      temp[lindex] = 0;
+    temp[lindex] = in[gindex];
+
+    if(tid < RADIUS){
+	if(gindex < RADIUS){temp[lindex - RADIUS] = 0;}
+	else{temp[lindex - RADIUS] = in[gindex - RADIUS];}
+	if(gindex + blocksize >= N){
+		int diff = gindex + blocksize - N;
+		if(diff < 3){temp[lindex + blocksize] = 0;}
+		else{temp[lindex + blocksize] = 0;}
+	}
+	else{temp[lindex + BLOCKSIZE] = in[gindex + blocksize];}
     }
 
-    if (tid < RADIUS)
-    {
-      if (gindex < RADIUS)
-      {
-        temp[lindex–RADIUS] = 0;
-      }
-      else
-      {
-        temp[lindex–RADIUS] = in[gindex–RADIUS];
-      }
-      if (gindex + BLOCKSIZE < N)
-      {
-        temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
-      }
-      else
-      {
-          temp[lindex + BLOCKSIZE] = 0;
-      }
-    }
+   __syncthreads();
+
     // Apply the stencil
     int result = 0;
-    for (int offset = -RADIUS; offset <= RADIUS; offset++)
-    {
-        if ( lindex + offset < dim && lindex + offset > -1)
-             result += temp[lindex + offset];
+    for (int offset = -RADIUS; offset <= RADIUS; offset++) {
+      if ( lindex + offset < dim && lindex + offset > -1)
+	        result += temp[lindex + offset];
     }
 
     // Store the result
     if (gindex < dim)
       out[gindex] = result;
 
+    // Update global index and quit if we are done
     gindex += stride;
+
     __syncthreads();
+
 
   }
 }
