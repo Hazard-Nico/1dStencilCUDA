@@ -309,7 +309,7 @@ int main(void){
       h_in = new int[N];
       h_out = new int[N];
 
-      getDeviceProperties();
+      //getDeviceProperties();
 
       // initialize vector
       for (i=0; i<N; i++){
@@ -326,14 +326,6 @@ int main(void){
       // copy input data to device
       cudaMemcpy(d_in, h_in, size, cudaMemcpyHostToDevice);
       cudaErrorCheck();
-
-      // Apply stencil by launching a sufficient number of blocks
-      printf("\n---------------------------\n");
-      printf("Launching 1D stencil kernel\n");
-      printf("---------------------------\n");
-      printf("Vector length     = %ld (%ld MB)\n",N,N*4/1024/1024);
-      printf("Stencil radius    = %d\n",RADIUS);
-
       //----------------------------------------------------------
       // CODE TO RUN AND TIME THE STENCIL KERNEL.
       //----------------------------------------------------------
