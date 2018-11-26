@@ -233,6 +233,7 @@ int main(void){
   int i;
   cudaEvent_t start, stop;
 
+/*
   // allocate host memory
   h_in = new int[N];
   h_out = new int[N];
@@ -294,9 +295,9 @@ int main(void){
   // deallocate host memory
   free(h_in);
   free(h_out);
-
+*/
   //==========================Running different optimization values============================
-/*
+
   gridSize = 16;
   blockSize = 32;
   for(int k = gridSize; k<=512; k*=2)
@@ -313,7 +314,7 @@ int main(void){
       for (i=0; i<N; i++){
         //    h_in[i] = i+1;
         h_in[i] = 1;
-        h_out[i] = 1;
+        h_out[i] = -1;
       }
 
       // allocate device memory
@@ -322,6 +323,7 @@ int main(void){
       cudaErrorCheck();
 
       // copy input data to device
+      cudaMemcpy(d_out, h_out, size, cudaMemcpyHostToDevice);
       cudaMemcpy(d_in, h_in, size, cudaMemcpyHostToDevice);
       cudaErrorCheck();
       //----------------------------------------------------------
@@ -359,5 +361,4 @@ int main(void){
       free(h_out);
     }
   }
-  */
 }
