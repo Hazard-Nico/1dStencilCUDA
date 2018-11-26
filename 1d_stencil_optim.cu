@@ -296,7 +296,7 @@ int main(void){
   blockSize = 32;
   for(i = gridSize; i<=512; i*=2)
   {
-    for (j = blockSize; j<=1024; j*=2)
+    for (int j = blockSize; j<=1024; j*=2)
     {
       start_timer(&start);
       int temp_size = (j+(2*RADIUS))*4;
