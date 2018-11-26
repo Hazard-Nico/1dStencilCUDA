@@ -135,13 +135,13 @@ __global__ void stencil_1D(int *in, int *out, long dim)
        {
          temp[lindex - RADIUS] = in[gindex - RADIUS];
        }
-	     if(gindex + BLOCKSIZE >= dim)
+	     if(gindex + blockDim.x >= dim)
        {
-         temp[lindex + BLOCKSIZE] = 0;
+         temp[lindex + blockDim.x] = 0;
 	     }
 	     else
        {
-         temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
+         temp[lindex + blockDim.x] = in[gindex + blockDim.x];
        }
     }
 
