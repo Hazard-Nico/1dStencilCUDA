@@ -129,20 +129,20 @@ __global__ void stencil_1D(int *in, int *out, long dim)
         {
           temp[lindex - RADIUS] = in[gindex - RADIUS];//fill up the left halo
         }
-	      if(gindex + blockSize >= N)//check if it's the last block
+	      if(gindex + BLOCKSIZE >= N)//check if it's the last block
         {
-		      temp[lindex + blockSize] = 0;//the very last halo
+		      temp[lindex + BLOCKSIZE] = 0;//the very last halo
         }
 		    else
         {
-          temp[lindex + blocksize] = in[gindex + blocksize];//fill up the right halo
+          temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];//fill up the right halo
         }
 	    }
     }
     else
     {
       temp[lindex] = 0;
-      temp[lindex + blockSize] = 0;
+      temp[lindex + BLOCKSIZE] = 0;
       if (tid < RADIUS)
       {
         if(gindex < RADIUS)
