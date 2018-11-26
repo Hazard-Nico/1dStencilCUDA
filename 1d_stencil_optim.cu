@@ -290,6 +290,7 @@ int main(void){
   // deallocate host memory
   free(h_in);
   free(h_out);
+  return 0;
 
   //==========================Running different optimization values============================
   gridSize = 16;
