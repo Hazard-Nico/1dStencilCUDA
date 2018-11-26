@@ -294,13 +294,14 @@ int main(void){
   //==========================Running different optimization values============================
   gridSize = 16;
   blockSize = 32;
-  for(i = gridSize; i<=512; i*=2)
+  for(int k = gridSize; i<=512; i*=2)
   {
     for (int j = blockSize; j<=1024; j*=2)
     {
       start_timer(&start);
-      int temp_size = (j+(2*RADIUS))*4;
-      stencil_1D<<<i,j,temp_size>>>(d_in, d_out, N);
+      int temp_size = (j+(2*RADIUS));
+      std::cout << "GridSize is "<<k<<" and block size is "<<j << std::endl;
+      stencil_1D<<<i,j,temp_size*sizeof(int)>>>(d_in, d_out, N);
       std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
       // copy results back to host
       cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
