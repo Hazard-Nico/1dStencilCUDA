@@ -15,8 +15,8 @@
 #define INPUTSIZE 64l
 #define N (1024*1024*INPUTSIZE)
 #define RADIUS 3
-#define GRIDSIZE 128
-#define BLOCKSIZE 256
+#define GRIDSIZE 512
+#define BLOCKSIZE 1024
 
 int gridSize  = GRIDSIZE;
 int blockSize = BLOCKSIZE;
@@ -230,7 +230,7 @@ int main(void){
   int i;
   cudaEvent_t start, stop;
 
-  /*
+
   // allocate host memory
   h_in = new int[N];
   h_out = new int[N];
@@ -291,9 +291,10 @@ int main(void){
   // deallocate host memory
   free(h_in);
   free(h_out);
-  */
+
 
   //==========================Running different optimization values============================
+  /*
   gridSize = 16;
   blockSize = 32;
   for(int k = gridSize; k<=512; k*=2)
@@ -342,7 +343,7 @@ int main(void){
       // deallocate host memory
       free(h_in);
       free(h_out);
-
+    */
     }
   }
 }
