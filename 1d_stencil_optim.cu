@@ -230,66 +230,68 @@ int main(void){
   int i;
   cudaEvent_t start, stop;
 
-  // // allocate host memory
-  // h_in = new int[N];
-  // h_out = new int[N];
-  //
-  // getDeviceProperties();
-  //
-  // // initialize vector
-  // for (i=0; i<N; i++){
-  //   //    h_in[i] = i+1;
-  //   h_in[i] = 1;
-  // }
-  //
-  // // allocate device memory
-  // cudaMalloc((void **)&d_in, size);
-  // cudaMalloc((void **)&d_out, size);
-  // cudaErrorCheck();
-  //
-  // // copy input data to device
-  // cudaMemcpy(d_in, h_in, size, cudaMemcpyHostToDevice);
-  // cudaErrorCheck();
-  //
-  // // Apply stencil by launching a sufficient number of blocks
-  // printf("\n---------------------------\n");
-  // printf("Launching 1D stencil kernel\n");
-  // printf("---------------------------\n");
-  // printf("Vector length     = %ld (%ld MB)\n",N,N*4/1024/1024);
-  // printf("Stencil radius    = %d\n",RADIUS);
-  //
-  // //----------------------------------------------------------
-  // // CODE TO RUN AND TIME THE STENCIL KERNEL.
-  // //----------------------------------------------------------
-  // newline();
-  // printThreadSizes();
-  // start_timer(&start);
-  // stencil_1D<<<gridSize,blockSize,(blockSize+(2*RADIUS))*sizeof(int)>>>(d_in, d_out, N);
-  // std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
-  // // copy results back to host
-  // cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
-  // cudaErrorCheck();
-  // checkResults(h_in, h_out);
-  // //----------------------------------------------------------
-  //
-  // // deallocate device memory
-  // cudaFree(d_in);
-  // cudaFree(d_out);
-  // cudaErrorCheck();
-  // //=====================================================
-  // // Evaluate total time of execution with just the CPU.
-  // //=====================================================
-  // newline();
-  // std::cout << "Running stencil with the CPU.\n";
-  // start_timer(&start);
-  // // Use checkResults to time CPU version of the stencil with False flag.
-  // checkResults(h_in, h_out, False);
-  // std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms"<< std::endl;
-  // //=====================================================
-  //
-  // // deallocate host memory
-  // free(h_in);
-  // free(h_out);
+  /*
+  // allocate host memory
+  h_in = new int[N];
+  h_out = new int[N];
+
+  getDeviceProperties();
+
+  // initialize vector
+  for (i=0; i<N; i++){
+    //    h_in[i] = i+1;
+    h_in[i] = 1;
+  }
+
+  // allocate device memory
+  cudaMalloc((void **)&d_in, size);
+  cudaMalloc((void **)&d_out, size);
+  cudaErrorCheck();
+
+  // copy input data to device
+  cudaMemcpy(d_in, h_in, size, cudaMemcpyHostToDevice);
+  cudaErrorCheck();
+
+  // Apply stencil by launching a sufficient number of blocks
+  printf("\n---------------------------\n");
+  printf("Launching 1D stencil kernel\n");
+  printf("---------------------------\n");
+  printf("Vector length     = %ld (%ld MB)\n",N,N*4/1024/1024);
+  printf("Stencil radius    = %d\n",RADIUS);
+
+  //----------------------------------------------------------
+  // CODE TO RUN AND TIME THE STENCIL KERNEL.
+  //----------------------------------------------------------
+  newline();
+  printThreadSizes();
+  start_timer(&start);
+  stencil_1D<<<gridSize,blockSize,(blockSize+(2*RADIUS))*sizeof(int)>>>(d_in, d_out, N);
+  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
+  // copy results back to host
+  cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
+  cudaErrorCheck();
+  checkResults(h_in, h_out);
+  //----------------------------------------------------------
+
+  // deallocate device memory
+  cudaFree(d_in);
+  cudaFree(d_out);
+  cudaErrorCheck();
+  //=====================================================
+  // Evaluate total time of execution with just the CPU.
+  //=====================================================
+  newline();
+  std::cout << "Running stencil with the CPU.\n";
+  start_timer(&start);
+  // Use checkResults to time CPU version of the stencil with False flag.
+  checkResults(h_in, h_out, False);
+  std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms"<< std::endl;
+  //=====================================================
+
+  // deallocate host memory
+  free(h_in);
+  free(h_out);
+  */
 
   //==========================Running different optimization values============================
   gridSize = 16;
