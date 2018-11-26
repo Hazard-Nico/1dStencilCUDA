@@ -1,0 +1,535 @@
+gridSize is 16 and blockSize is32
+Elapsed time: 2712.88 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1717.03 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 16 and blockSize is64
+Elapsed time: 1357.77 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1684.87 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 16 and blockSize is128
+Elapsed time: 680 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1649.9 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 16 and blockSize is256
+Elapsed time: 340.667 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1662 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 16 and blockSize is512
+Elapsed time: 175.471 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1652.61 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 16 and blockSize is1024
+Elapsed time: 100.937 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1679.85 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 32 and blockSize is32
+Elapsed time: 1356.31 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1681.57 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 32 and blockSize is64
+Elapsed time: 679.723 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1663.07 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 32 and blockSize is128
+Elapsed time: 341.289 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.23 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 32 and blockSize is256
+Elapsed time: 172.071 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1693.14 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 32 and blockSize is512
+Elapsed time: 90.9056 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1661.35 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 32 and blockSize is1024
+Elapsed time: 100.738 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1690.03 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 64 and blockSize is32
+Elapsed time: 679.658 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1651.4 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 64 and blockSize is64
+Elapsed time: 341.311 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.07 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 64 and blockSize is128
+Elapsed time: 172.168 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1734.59 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 64 and blockSize is256
+Elapsed time: 87.9277 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1649.42 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 64 and blockSize is512
+Elapsed time: 96.1408 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.42 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 64 and blockSize is1024
+Elapsed time: 75.5079 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1649.52 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 128 and blockSize is32
+Elapsed time: 341.122 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.2 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 128 and blockSize is64
+Elapsed time: 172.143 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1649.92 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 128 and blockSize is128
+Elapsed time: 88.0046 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.28 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 128 and blockSize is256
+Elapsed time: 94.2454 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1654.23 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 128 and blockSize is512
+Elapsed time: 72.3287 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1649.92 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 128 and blockSize is1024
+Elapsed time: 63.5112 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.59 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 256 and blockSize is32
+Elapsed time: 339.838 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.56 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 256 and blockSize is64
+Elapsed time: 173.164 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1660.22 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 256 and blockSize is128
+Elapsed time: 93.1215 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1654.59 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 256 and blockSize is256
+Elapsed time: 70.8149 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.86 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 256 and blockSize is512
+Elapsed time: 60.8411 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1661.45 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 256 and blockSize is1024
+Elapsed time: 63.4235 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1659.55 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 512 and blockSize is32
+Elapsed time: 256.527 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.55 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 512 and blockSize is64
+Elapsed time: 130.145 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1678.76 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 512 and blockSize is128
+Elapsed time: 70.4393 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1662.65 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 512 and blockSize is256
+Elapsed time: 59.2141 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.57 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 512 and blockSize is512
+Elapsed time: 60.5787 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1650.52 ms
+>>>> cudaSuccess
+>>>> no error
+>>>> cudaSuccess
+>>>> no error
+
+gridSize is 512 and blockSize is1024
+Elapsed time: 63.5854 ms
+>>>> cudaSuccess
+>>>> no error
+Success! All elements match CPU result.
+>>>> cudaSuccess
+>>>> no error
+
+Running stencil with the CPU.
+Elapsed time: 1651.37 ms

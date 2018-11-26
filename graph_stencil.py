@@ -1,6 +1,6 @@
 # Utility Plotting Program for Hwk 4.
 # Author Marcelo Siero
-# CS220 Advanced Parallel Processing, 
+# CS220 Advanced Parallel Processing,
 # Fall of 2018.
 
 import matplotlib
@@ -12,11 +12,11 @@ import numpy as np
 # plt.show()
 cpu_elapsed_time = 14752.9639
 
+my_cpu_elapsed_time = 1670
+
 elapsed = np.array(
     [
-       PUT YOUR LIST OF ELAPSED TIMES HERE, 36 OF THEM.
-       MAKE SURE THEY FOLLOW THE SAME ORDER, AND THE SAME
-       SET OF TEST VALUES FOR GRIDDIM AND BLOCKDIM.
+        244, 124, 63, 34, 22, 14, 123, 62, 32, 18, 12, 13, 61, 31, 16, 9, 12, 11, 31, 16, 10, 10, 9, 9, 33, 17, 10, 8, 8, 9, 24, 13, 8, 7, 8, 9
     ])
 
 blockSize = []
@@ -70,7 +70,7 @@ for gSz in gridSizeList:
 # colors = cm.rainbow(np.linspace(0, 1, len(ys)))
 # colormap = plt.cm.gist_ncar #nipy_spectral, Set1,Paired
 #    Need to look up cm
-# cs = [colormap(i) for i in np.linspace(0, 0.9,len(ax.collections))]       
+# cs = [colormap(i) for i in np.linspace(0, 0.9,len(ax.collections))]
 # cs = [colors[i//len(X)] for i in range(len(Ys)*len(X))] #could be done with numpy's repmat
 ###############################################################
 ## red dashes: r--, blue squares: b and green triangles
@@ -93,7 +93,7 @@ axes = fig.add_subplot(1,1,1)
 # axes.set_xlim([1, len(gridSizeList[0])])
 plt.ylabel('Time in Msec.')
 plt.xlabel('blockDim (threads per block)')
-# given a single gridSize show relation to blockSize (TPB). 
+# given a single gridSize show relation to blockSize (TPB).
 for gSz in gridSizeList:
    plt.plot(blockSizeList, byBlockSize[gSz])
 lines = axes.get_lines()
@@ -117,4 +117,3 @@ legend = plt.legend([lines[i] \
 axes.add_artist(legend)
 plt.savefig("time_vs_gridDim", bbox_inches="tight")
 plt.close()
-

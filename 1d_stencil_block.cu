@@ -109,25 +109,7 @@ __global__ void stencil_1D_block(int *in, int *out, long dim){
     //read all gindex elements into the temp array
   temp[lindex] = in[gindex];
 
-  if (gindex < RADIUS)   //for the first 3 threads in the grid
-  {
-      temp[lindex - RADIUS] = 0;
-      temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
-
-  }
-
-  else if (gindex >= (stride - RADIUS)) //last three threads in the grid
-  {
-      temp[lindex - RADIUS] = in[gindex - RADIUS];
-      temp[lindex + BLOCKSIZE] = 0;
-  }
-
-  else
-  {
-    temp[lindex - RADIUS] = in[gindex - RADIUS];
-    temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];
-  }
-
+  
   // Apply the stencil
   int result = 0;
   for (int offset = -RADIUS; offset <= RADIUS; offset++)
