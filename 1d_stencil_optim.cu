@@ -294,7 +294,7 @@ int main(void){
   //==========================Running different optimization values============================
   gridSize = 16;
   blockSize = 32;
-  for(int k = gridSize; i<=512; i*=2)
+  for(int k = gridSize; k<=512; k*=2)
   {
     for (int j = blockSize; j<=1024; j*=2)
     {
