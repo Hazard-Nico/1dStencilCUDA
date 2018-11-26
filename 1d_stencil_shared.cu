@@ -121,12 +121,12 @@ __global__ void stencil_1D(int *in, int *out, long dim)
     if(tid < RADIUS){
 	if(gindex < RADIUS){temp[lindex - RADIUS] = 0;}
 	else{temp[lindex - RADIUS] = in[gindex - RADIUS];}
-	if(gindex + blockSize >= N){
-		int diff = gindex + blockSize - N;
-		if(diff < 3){temp[lindex + blockSize] = 0;}
-		else{temp[lindex + blockSize] = 0;}
+	if(gindex + BLOCKSIZE >= N){
+		int diff = gindex + BLOCKSIZE - N;
+		if(diff < 3){temp[lindex + BLOCKSIZE] = 0;}
+		else{temp[lindex + BLOCKSIZE] = 0;}
 	}
-	else{temp[lindex + BLOCKSIZE] = in[gindex + blockSize];}
+	else{temp[lindex + BLOCKSIZE] = in[gindex + BLOCKSIZE];}
     }
 
    __syncthreads();
