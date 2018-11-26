@@ -105,7 +105,7 @@ CUDA device function that performs 1D stencil operation
 */
 __global__ void stencil_1D(int *in, int *out, long dim)
 {
-  __shared__ int temp[];
+  extern __shared__ int temp[];
 
   long gindex = threadIdx.x + blockDim.x * blockIdx.x;
   int stride = gridDim.x * blockDim.x;
