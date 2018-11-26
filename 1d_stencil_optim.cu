@@ -343,7 +343,8 @@ int main(void){
       // deallocate host memory
       free(h_in);
       free(h_out);
-    */
+
     }
   }
+  */
 }
