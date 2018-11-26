@@ -129,9 +129,9 @@ __global__ void stencil_1D(int *in, int *out, long dim)
         {
           temp[lindex - RADIUS] = in[gindex - RADIUS];//fill up the left halo
         }
-	      if(gindex + blocksize >= N)//check if it's the last block
+	      if(gindex + blockSize >= N)//check if it's the last block
         {
-		      temp[lindex + blocksize] = 0;//the very last halo
+		      temp[lindex + blockSize] = 0;//the very last halo
         }
 		    else
         {
@@ -142,7 +142,7 @@ __global__ void stencil_1D(int *in, int *out, long dim)
     else
     {
       temp[lindex] = 0;
-      temp[lindex + blocksize] = 0;
+      temp[lindex + blockSize] = 0;
       if (tid < RADIUS)
       {
         if(gindex < RADIUS)
@@ -170,6 +170,7 @@ __global__ void stencil_1D(int *in, int *out, long dim)
     out[gindex] = result;
 
     __syncthreads();
+    gindex += stride;
 
   }
 }
