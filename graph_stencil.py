@@ -107,7 +107,7 @@ plt.close()
 fig = plt.figure(3)
 plt.title('Time versus gridDim (Blocks/Grid)')
 axes = fig.add_subplot(1,1,1)
-plt.xlabel('gridDim (blocks per thread)')
+plt.xlabel('gridDim (blocks per grid)')
 plt.ylabel('Time in Msec.')
 for bSz in blockSizeList:
    plt.plot(gridSizeList, byGridSize[bSz])
