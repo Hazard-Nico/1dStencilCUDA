@@ -326,9 +326,9 @@ int main(void){
       newline();
       printThreadSizes();
       start_timer(&start);
-      int temp_size = (j+(2*RADIUS));
+      //int temp_size = (j+(2*RADIUS));
       std::cout << "GridSize is "<<k<<" and block size is "<<j << std::endl;
-      stencil_1D<<<i,j,temp_size*sizeof(int)>>>(d_in, d_out, N);
+      stencil_1D<<<i,j,(j+(2*RADIUS))*sizeof(int)>>>(d_in, d_out, N);
       std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
       // copy results back to host
       cudaMemcpy(h_out, d_out, size, cudaMemcpyDeviceToHost);
