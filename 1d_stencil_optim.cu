@@ -309,7 +309,11 @@ int main(void){
       h_in = new int[N];
       h_out = new int[N];
 
+      getDeviceProperties();
+
+      // initialize vector
       for (i=0; i<N; i++){
+        //    h_in[i] = i+1;
         h_in[i] = 1;
         h_out[i] = 1;
       }
@@ -323,11 +327,19 @@ int main(void){
       cudaMemcpy(d_in, h_in, size, cudaMemcpyHostToDevice);
       cudaErrorCheck();
 
+      // Apply stencil by launching a sufficient number of blocks
+      printf("\n---------------------------\n");
+      printf("Launching 1D stencil kernel\n");
+      printf("---------------------------\n");
+      printf("Vector length     = %ld (%ld MB)\n",N,N*4/1024/1024);
+      printf("Stencil radius    = %d\n",RADIUS);
+
+      //----------------------------------------------------------
+      // CODE TO RUN AND TIME THE STENCIL KERNEL.
+      //----------------------------------------------------------
       newline();
       printThreadSizes();
       start_timer(&start);
-      //int temp_size = (j+(2*RADIUS));
-      std::cout << "GridSize is "<<k<<" and block size is "<<j << std::endl;
       stencil_1D<<<i,j,(j+(2*RADIUS))*sizeof(int)>>>(d_in, d_out, N);
       std::cout << "Elapsed time: " << stop_timer(&start, &stop) << " ms" << std::endl;
       // copy results back to host
@@ -354,7 +366,6 @@ int main(void){
       // deallocate host memory
       free(h_in);
       free(h_out);
-
     }
   }
 }
