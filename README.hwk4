@@ -3,7 +3,7 @@ Prof. Heiner Litz
 TA: Marcelo Siero.
 Fall Quarter 2018.
 
-#### The Stencil Program, use of Shared Memory in CUDA (40 Pts)
+The Stencil Program, use of Shared Memory in CUDA (40 Pts)
 
 This exercise is help you learn and gain experience with CUDA programming
 and with how to use shared memory to accelerate important algorithms.
